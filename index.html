@@ -35,7 +35,7 @@
       border: 1px solid transparent; cursor: pointer; transition: .2s ease;
     }
     .btn-primary { background: var(--orange); color: #fff; }
-    .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.03); box-shadow: 0 16px 30px rgba(242,92,5,.26); }
     .btn-secondary { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.18); }
     .btn-secondary:hover { background: rgba(255,255,255,.14); }
     .pill {
@@ -103,11 +103,25 @@
       background: rgba(242,92,5,.1); color: var(--orange); font-size: 13px; font-weight: 800;
     }
     .services { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .service-card { padding: 28px; }
+    .service-card { padding: 28px; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; border: 1px solid transparent; }
+    .logo-card { padding: 24px; }
+    .logo-badge {
+      min-height: 96px; border-radius: 22px; border: 1px solid rgba(7,59,99,.08);
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, #fff, #f8fafc);
+      padding: 16px;
+    }
+    .logo-badge img {
+      max-width: 100%; max-height: 64px; object-fit: contain; display: block;
+    }
+    .logo-card p { margin-bottom: 0; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.16); border-color: rgba(7,59,99,.08); }
     .icon {
       width: 50px; height: 50px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center;
       background: rgba(7,59,99,.08); color: var(--blue); font-size: 22px; margin-bottom: 18px;
+      transition: transform .22s ease, background .22s ease, color .22s ease;
     }
+    .service-card:hover .icon { transform: scale(1.06); background: rgba(242,92,5,.12); color: var(--orange); }
     .service-card h3 { margin: 0; font-size: 24px; letter-spacing: -0.02em; }
     .service-card p { margin: 14px 0 0; color: var(--muted); line-height: 1.7; }
 
@@ -324,11 +338,11 @@
         <p class="body-lg">Trabajo con un portafolio de aseguradoras reconocidas para ayudarte a comparar opciones y elegir la solución que mejor se adapte a tu perfil, objetivo y presupuesto.</p>
       </div>
       <div class="grid services" style="grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom:24px;">
-        <div class="card service-card center"><div class="icon">M</div><h3 style="font-size:22px;">MAPFRE</h3><p>GMM, vida, autos y daños.</p></div>
-        <div class="card service-card center"><div class="icon">SM</div><h3 style="font-size:22px;">Seguros Monterrey</h3><p>Vida, GMM, Vida Mujer y educativo.</p></div>
-        <div class="card service-card center"><div class="icon">A</div><h3 style="font-size:22px;">Seguros Atlas</h3><p>Vida, GMM, autos, hogar y educativo.</p></div>
-        <div class="card service-card center"><div class="icon">Q</div><h3 style="font-size:22px;">Quálitas</h3><p>Especialista en seguro automotriz.</p></div>
-        <div class="card service-card center"><div class="icon">ANA</div><h3 style="font-size:22px;">Seguros ANA</h3><p>Opciones para auto y protección patrimonial.</p></div>
+        <div class="card service-card center logo-card"><div class="logo-badge"><img src="Logo-mapfre-fondo-transparente.png" alt="MAPFRE"></div><h3 style="font-size:22px; margin-top:18px;">MAPFRE</h3><p>GMM, vida, autos y daños.</p></div>
+        <div class="card service-card center logo-card"><div class="logo-badge"><img src="logosm.png" alt="Seguros Monterrey"></div><h3 style="font-size:22px; margin-top:18px;">Seguros Monterrey</h3><p>Vida, GMM, Vida Mujer y educativo.</p></div>
+        <div class="card service-card center logo-card"><div class="logo-badge"><img src="Logo-seguros-Atlas-copia.webp" alt="Seguros Atlas"></div><h3 style="font-size:22px; margin-top:18px;">Seguros Atlas</h3><p>Vida, GMM, autos, hogar y educativo.</p></div>
+        <div class="card service-card center logo-card"><div class="logo-badge"><img src="QUALITAS-Seguros-3.png" alt="Quálitas"></div><h3 style="font-size:22px; margin-top:18px;">Quálitas</h3><p>Especialista en seguro automotriz.</p></div>
+        <div class="card service-card center logo-card"><div class="logo-badge"><img src="logosegurosana.png" alt="Seguros ANA"></div><h3 style="font-size:22px; margin-top:18px;">Seguros ANA</h3><p>Opciones para auto y protección patrimonial.</p></div>
       </div>
       <div class="section-head" style="margin-top:12px; margin-bottom:34px;">
         <p class="body-lg">La propuesta es clara: no se trata de empujarte una sola compañía, sino de presentarte el catálogo que manejo y recomendarte la alternativa correcta para tu caso.</p>
@@ -377,23 +391,83 @@
     </div>
   </section>
 
-  <section class="container" style="padding-bottom:88px;">
-    <div class="card cta-grid">
-      <div class="cta-left">
-        <div class="overline" style="color:rgba(255,255,255,.72);">Contacto</div>
-        <h2 class="title-xl" style="margin-top:12px; color:#fff;">Listo para cotizar con una imagen premium y argumentos sólidos</h2>
-        <p class="body-lg" style="color:rgba(255,255,255,.82);">Agenda una conversación y revisamos juntos cuál es la mejor estrategia para tu salud, patrimonio y futuro financiero.</p>
-      </div>
-      <div class="cta-right">
-        <div style="display:grid; gap:20px;">
-          <div><div class="overline">Marca</div><div style="font-size:24px; font-weight:900; margin-top:6px;">Seguro con Hugo</div></div>
-          <div><div class="overline">Aseguradoras que manejo</div><div style="font-size:20px; font-weight:900; margin-top:6px; line-height:1.4;">MAPFRE · Seguros Monterrey · Seguros Atlas · Quálitas · Seguros ANA</div></div>
-          <div><div class="overline">Teléfono</div><div style="font-size:24px; font-weight:900; margin-top:6px;">833 140 7251</div></div>
-          <div><div class="overline">Especialidades</div><div style="font-size:24px; font-weight:900; margin-top:6px;">GMM, Retiro, Vida Mujer y Educativo</div></div>
+  <section class="section" style="padding-top:8px; padding-bottom:32px;">
+    <div class="container grid two-col" style="align-items:stretch;">
+      <div class="card pad-card" style="background:linear-gradient(135deg, rgba(7,59,99,.06), rgba(242,92,5,.08)); border:1px solid rgba(7,59,99,.08);">
+        <div class="overline" style="color:var(--orange);">Acerca de mí</div>
+        <h2 class="title-xl" style="margin-top:12px;">Soy Hugo y mi enfoque es ayudarte a decidir bien</h2>
+        <p class="body-lg">Trabajo desde una asesoría clara, personalizada y orientada a proteger lo que más valoras: tu salud, tu familia, tu patrimonio y tus metas de largo plazo.</p>
+        <p class="body-lg">Me especializo en <strong>Gastos Médicos Mayores</strong> y <strong>Retiro</strong>, sin dejar de lado soluciones como <strong>Vida Mujer</strong>, <strong>Seguro Educativo</strong>, vivienda, autos y mascotas.</p>
+        <p class="body-lg">Mi prioridad no es vender por vender, sino ayudarte a entender qué te conviene, con una propuesta seria, honesta y bien aterrizada a tu realidad.</p>
+        <div class="tag-row" style="margin-top:22px;">
+          <span class="tag" style="background:rgba(7,59,99,.9);">Asesoría clara</span>
+          <span class="tag" style="background:rgba(7,59,99,.9);">Enfoque patrimonial</span>
+          <span class="tag" style="background:rgba(7,59,99,.9);">Atención personalizada</span>
         </div>
-        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:28px;">
-          <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20cotizar%20un%20seguro." target="_blank">Enviar WhatsApp</a>
-          <a class="btn" style="border:1px solid var(--border); background:#fff; color:var(--text);" href="tel:+528331407251">Llamar ahora</a>
+      </div>
+      <div class="card pad-card" style="background:white; border:1px solid rgba(7,59,99,.08);">
+        <div class="overline" style="color:var(--orange);">Mi forma de trabajar</div>
+        <h2 class="title-xl" style="margin-top:12px;">Una recomendación correcta vale más que una cotización rápida</h2>
+        <div class="grid" style="gap:14px; margin-top:22px;">
+          <div class="stat soft-blue"><small>1. Diagnóstico</small><strong style="font-size:24px; color:var(--text);">Entiendo tu prioridad</strong></div>
+          <div class="stat soft-orange"><small>2. Comparación</small><strong style="font-size:24px; color:var(--text);">Reviso opciones contigo</strong></div>
+          <div class="stat"><small>3. Recomendación</small><strong style="font-size:24px; color:var(--text);">Te propongo lo que sí hace sentido</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px; padding-bottom:24px;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Confianza</span>
+        <h2 class="title-xl">Lo que valoran mis clientes</h2>
+        <p class="body-lg">Una buena asesoría no solo se nota en la cotización, también en la claridad, el acompañamiento y la tranquilidad que deja la decisión.</p>
+      </div>
+      <div class="grid services" style="grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom:12px;">
+        <div class="card service-card"><div class="icon">★</div><h3>Atención clara</h3><p>"Me gustó que me explicaron todo con calma y sin empujarme algo que no necesitaba."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en protección personal</p></div>
+        <div class="card service-card"><div class="icon">★</div><h3>Visión de largo plazo</h3><p>"No sentí que solo me estuvieran vendiendo un seguro; realmente revisamos una estrategia para mi futuro."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en retiro</p></div>
+        <div class="card service-card"><div class="icon">★</div><h3>Confianza al decidir</h3><p>"Comparar varias opciones conmigo hizo mucho más fácil elegir bien y entender por qué una sí me convenía."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en protección familiar</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0; padding-bottom:32px;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2 class="title-xl">Dudas comunes antes de contratar</h2>
+        <p class="body-lg">Una landing premium también debe resolver objeciones antes de la primera conversación.</p>
+      </div>
+      <div class="grid" style="gap:16px; max-width:980px; margin:0 auto;">
+        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿Trabajas con una sola aseguradora?</h3><p class="body-lg" style="margin:0;">No. Trabajo con un catálogo de aseguradoras para comparar alternativas y recomendar la opción que mejor se ajuste a tu perfil, objetivo y presupuesto.</p></div>
+        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿Cuáles son tus productos principales?</h3><p class="body-lg" style="margin:0;">Mi enfoque principal está en Gastos Médicos Mayores y Retiro, además de Vida Mujer, seguro educativo, vivienda, autos y mascotas.</p></div>
+        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿La asesoría tiene costo?</h3><p class="body-lg" style="margin:0;">La primera conversación está pensada para entender tu necesidad, orientarte y revisar contigo qué tipo de protección o estrategia hace sentido.</p></div>
+        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿También me ayudas a comparar opciones?</h3><p class="body-lg" style="margin:0;">Sí. La idea es que no elijas a ciegas. Revisamos diferencias relevantes de cobertura, objetivo y estructura para tomar una decisión bien sustentada.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:88px;">
+    <div class="card" style="overflow:hidden;">
+      <div style="padding:48px; text-align:center; background:linear-gradient(135deg, var(--blue), #0B5A93); color:white;">
+        <div class="overline" style="color:rgba(255,255,255,.7);">Asesoría personalizada</div>
+        <h2 class="title-xl" style="margin-top:12px; color:white;">Hablemos de tu estrategia ideal</h2>
+        <p class="body-lg" style="color:rgba(255,255,255,.85); max-width:600px; margin:16px auto 0;">
+          Cada persona necesita una solución distinta. Escríbeme y revisamos juntos qué tipo de protección hace sentido para ti.
+        </p>
+
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:32px;">
+          <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20una%20asesor%C3%ADa%20personalizada." target="_blank">
+            Enviar WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="tel:+528331407251">
+            Llamar ahora
+          </a>
+        </div>
+
+        <div style="margin-top:28px; font-size:14px; color:rgba(255,255,255,.7);">
+          Atención directa · Respuesta rápida · Asesoría clara
         </div>
       </div>
     </div>
