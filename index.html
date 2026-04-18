@@ -94,7 +94,7 @@
         <div class="card service-card"><div class="icon">🎓</div><h3>Seguro Educativo</h3><p>Planeación para asegurar la educación de tus hijos, con una estrategia financiera pensada para el largo plazo.</p></div>
         <div class="card service-card"><div class="icon">⌂</div><h3>Daños para vivienda</h3><p>Coberturas para proteger tu casa, departamento o patrimonio inmobiliario frente a eventos imprevistos.</p></div>
         <div class="card service-card"><div class="icon">🚗</div><h3>Seguro de auto</h3><p>Opciones para proteger tu vehículo, tu responsabilidad civil y tu estabilidad económica en carretera o ciudad.</p></div>
-        <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p><div style="margin-top:16px;"><button onclick="toggleMascotaForm()" style="background:var(--orange);color:white;border:none;padding:10px 16px;border-radius:12px;font-weight:600;cursor:pointer;">Cotizar mascota</button></div><div id="mascotaForm" style="display:none;margin-top:16px;"><input id="petNombre" placeholder="Nombre de tu mascota" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><input id="petTipo" placeholder="Perro o gato" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><input id="petEdad" placeholder="Edad (años)" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><button onclick="enviarMascota()" style="width:100%;background:#073B63;color:white;border:none;padding:12px;border-radius:12px;font-weight:600;cursor:pointer;">Enviar por WhatsApp</button></div></div>
+        <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p><div style="margin-top:16px;"><button onclick="toggleMascotaForm()" style="background:var(--orange);color:white;border:none;padding:11px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 10px 22px rgba(242,92,5,.18);">Cotizar mascota</button></div><div id="mascotaForm" style="display:none;margin-top:16px;padding:16px;border-radius:18px;background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(7,59,99,.10);"><div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px;letter-spacing:.02em;">Datos para cotización</div><input id="petNombre" placeholder="Nombre" style="width:100%;margin-bottom:10px;padding:12px 14px;border-radius:12px;border:1px solid #d6dee8;background:white;"><input id="petEdad" placeholder="Edad (años)" style="width:100%;margin-bottom:10px;padding:12px 14px;border-radius:12px;border:1px solid #d6dee8;background:white;"><input id="petPeso" placeholder="Peso (kg)" style="width:100%;margin-bottom:10px;padding:12px 14px;border-radius:12px;border:1px solid #d6dee8;background:white;"><input id="petRaza" placeholder="Raza" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:12px;border:1px solid #d6dee8;background:white;"><button onclick="enviarMascota()" style="width:100%;background:#073B63;color:white;border:none;padding:13px;border-radius:12px;font-weight:700;cursor:pointer;">Enviar por WhatsApp</button></div></div>
         <div class="card service-card"><div class="icon">✈️</div><h3>Seguro de Viajero</h3><p>Protección para viajar con mayor tranquilidad ante imprevistos médicos, cancelaciones y eventualidades durante tu trayecto.</p></div>
         <div class="card service-card"><div class="icon">🛡</div><h3>Protección integral</h3><p>Un análisis completo para ayudarte a elegir lo que realmente necesitas, sin sobreprotegerte ni quedarte corto.</p></div>
       </div>
@@ -194,14 +194,16 @@
     }
 
     function enviarMascota(){
-      const nombre = document.getElementById("petNombre").value;
-      const tipo = document.getElementById("petTipo").value;
-      const edad = document.getElementById("petEdad").value;
+      const nombre = document.getElementById("petNombre").value.trim();
+      const edad = document.getElementById("petEdad").value.trim();
+      const peso = document.getElementById("petPeso").value.trim();
+      const raza = document.getElementById("petRaza").value.trim();
 
       const mensaje = `Hola Hugo, quiero cotizar seguro para mi mascota:
 Nombre: ${nombre}
-Tipo: ${tipo}
-Edad: ${edad}`;
+Edad: ${edad}
+Peso: ${peso}
+Raza: ${raza}`;
 
       const url = "https://wa.me/528331407251?text=" + encodeURIComponent(mensaje);
       window.open(url, "_blank");
