@@ -94,7 +94,7 @@
         <div class="card service-card"><div class="icon">🎓</div><h3>Seguro Educativo</h3><p>Planeación para asegurar la educación de tus hijos, con una estrategia financiera pensada para el largo plazo.</p></div>
         <div class="card service-card"><div class="icon">⌂</div><h3>Daños para vivienda</h3><p>Coberturas para proteger tu casa, departamento o patrimonio inmobiliario frente a eventos imprevistos.</p></div>
         <div class="card service-card"><div class="icon">🚗</div><h3>Seguro de auto</h3><p>Opciones para proteger tu vehículo, tu responsabilidad civil y tu estabilidad económica en carretera o ciudad.</p></div>
-        <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p></div>
+        <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p><div style="margin-top:16px;"><button onclick="toggleMascotaForm()" style="background:var(--orange);color:white;border:none;padding:10px 16px;border-radius:12px;font-weight:600;cursor:pointer;">Cotizar mascota</button></div><div id="mascotaForm" style="display:none;margin-top:16px;"><input id="petNombre" placeholder="Nombre de tu mascota" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><input id="petTipo" placeholder="Perro o gato" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><input id="petEdad" placeholder="Edad (años)" style="width:100%;margin-bottom:8px;padding:10px;border-radius:10px;border:1px solid #ccc;"><button onclick="enviarMascota()" style="width:100%;background:#073B63;color:white;border:none;padding:12px;border-radius:12px;font-weight:600;cursor:pointer;">Enviar por WhatsApp</button></div></div>
         <div class="card service-card"><div class="icon">✈️</div><h3>Seguro de Viajero</h3><p>Protección para viajar con mayor tranquilidad ante imprevistos médicos, cancelaciones y eventualidades durante tu trayecto.</p></div>
         <div class="card service-card"><div class="icon">🛡</div><h3>Protección integral</h3><p>Un análisis completo para ayudarte a elegir lo que realmente necesitas, sin sobreprotegerte ni quedarte corto.</p></div>
       </div>
@@ -149,7 +149,7 @@
   </section>
   <section class="section">
     <div class="container">
-      <div class="section-head" style="margin-bottom:20px;"><span class="eyebrow">Aseguradoras</span></div>
+      <div class="section-head"><span class="eyebrow">Aseguradoras</span><h2 class="title-xl">Catálogo de aseguradoras que manejo</h2><p class="body-lg">Trabajo con varias aseguradoras para ayudarte a comparar y elegir mejor.</p></div>
       <div class="grid logos">
         <div class="card logo-card"><div class="logo-badge"><img src="Logo-mapfre-fondo-transparente.png" alt="MAPFRE"></div><h3>MAPFRE</h3><p>GMM, vida, autos y daños.</p></div>
         <div class="card logo-card"><div class="logo-badge"><img src="logosm.png" alt="Seguros Monterrey"></div><h3>Seguros Monterrey</h3><p>Vida, GMM, Vida Mujer y educativo.</p></div>
@@ -186,7 +186,27 @@
   </section>
   <footer>Seguro con Hugo · Asesoría personalizada en protección y planeación patrimonial</footer>
   <a href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20de%20seguros." class="whatsapp-float" target="_blank" rel="noreferrer" aria-label="WhatsApp">💬</a>
+
   <script>
+    function toggleMascotaForm(){
+      const form = document.getElementById("mascotaForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
+    function enviarMascota(){
+      const nombre = document.getElementById("petNombre").value;
+      const tipo = document.getElementById("petTipo").value;
+      const edad = document.getElementById("petEdad").value;
+
+      const mensaje = `Hola Hugo, quiero cotizar seguro para mi mascota:
+Nombre: ${nombre}
+Tipo: ${tipo}
+Edad: ${edad}`;
+
+      const url = "https://wa.me/528331407251?text=" + encodeURIComponent(mensaje);
+      window.open(url, "_blank");
+    }
+
     const money = (value) => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(Number.isFinite(value)?value:0);
     function retirementFV(pmt,r,n){if(n<=0)return 0;if(r===0)return pmt*n;return pmt*(((Math.pow(1+r,n)-1)/r)*(1+r))}
     function futureValueGrowingMonthly(initialMonthly,monthlyRate,annualGrowthRate,months){let balance=0;for(let i=0;i<months;i++){const yearIndex=Math.floor(i/12);const contribution=initialMonthly*Math.pow(1+annualGrowthRate,yearIndex);balance=(balance+contribution)*(1+monthlyRate)}return balance}
