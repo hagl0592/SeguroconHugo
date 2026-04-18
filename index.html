@@ -4,485 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Seguro con Hugo</title>
-  <meta name="description" content="Asesoría premium en Gastos Médicos Mayores, retiro, Vida Mujer, seguro educativo, vivienda, autos y mascotas." />
+  <meta name="description" content="Asesoría personalizada en Gastos Médicos Mayores, retiro, Vida Mujer, seguro educativo, autos, vivienda, mascotas y seguro de viajero." />
   <style>
-    :root {
-      --blue: #073B63;
-      --orange: #F25C05;
-      --white: #FFFFFF;
-      --soft: #F6F8FB;
-      --text: #0F172A;
-      --muted: #475569;
-      --border: #E2E8F0;
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
-      --radius: 28px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: var(--white); }
-    a { text-decoration: none; color: inherit; }
-    .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 22px; border-radius: 18px; font-weight: 700; border: 1px solid transparent; cursor: pointer; transition: .2s ease; color: inherit; }
-    .btn-primary { background: var(--orange); color: #fff; }
-    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.03); box-shadow: 0 16px 30px rgba(242,92,5,.26); }
-    .btn-secondary { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.18); }
-    .btn-secondary:hover { background: rgba(255,255,255,.14); }
-    .pill { display: inline-block; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,.1); color: #fff; }
-    .section { padding: 88px 0; }
-    .section-soft { background: var(--soft); }
-    .grid { display: grid; gap: 24px; }
-    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--blue), #0A4F80); color: #fff; }
-    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(255,255,255,.22), transparent 30%); pointer-events: none; }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0 8px; position: relative; z-index: 2; }
-    .logo-wrap { display: flex; align-items: center; gap: 14px; }
-    .logo-box { width: 72px; height: 72px; border-radius: 22px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,.18); }
-    .logo-h { color: var(--orange); font-size: 58px; font-weight: 900; line-height: 1; }
-    .logo-title { font-size: 24px; font-weight: 900; }
-    .logo-sub { color: rgba(255,255,255,.72); font-size: 14px; }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr .9fr; gap: 44px; align-items: center; padding: 52px 0 92px; position: relative; z-index: 2; }
-    h1 { font-size: clamp(40px, 6vw, 70px); line-height: .98; margin: 18px 0 0; letter-spacing: -0.03em; }
-    .lead { font-size: 20px; line-height: 1.6; color: rgba(255,255,255,.82); margin-top: 22px; max-width: 720px; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-    .hero-points { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-top: 34px; }
-    .point { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.88); }
-    .check { width: 22px; height: 22px; border-radius: 50%; background: rgba(242,92,5,.18); color: var(--orange); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; }
-    .card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-    .hero-card { background: rgba(255,255,255,.96); padding: 34px; }
-    .hero-logo { width: 210px; height: 210px; border-radius: 999px; margin: 0 auto; background: var(--blue); display: flex; align-items: center; justify-content: center; }
-    .hero-logo span { font-size: 180px; color: var(--orange); line-height: 1; font-weight: 900; }
-    .center { text-align: center; }
-    .overline { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: #475569; font-weight: 800; }
-    .title-xl { font-size: clamp(32px, 4vw, 48px); line-height: 1.04; margin: 0; letter-spacing: -0.03em; }
-    .body-lg { font-size: 18px; line-height: 1.7; color: #475569; }
-    .section-head { max-width: 820px; margin: 0 auto 46px; text-align: center; }
-    .eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 14px; border-radius: 999px; background: rgba(242,92,5,.1); color: var(--orange); font-size: 13px; font-weight: 800; }
-    .services { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .service-card { padding: 28px; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; border: 1px solid transparent; }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(15, 23, 42, 0.16); border-color: rgba(7,59,99,.08); }
-    .logo-card { padding: 24px; }
-    .icon { width: 50px; height: 50px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; background: rgba(7,59,99,.08); color: var(--blue); font-size: 22px; margin-bottom: 18px; transition: transform .22s ease, background .22s ease, color .22s ease; }
-    .service-card:hover .icon { transform: scale(1.06); background: rgba(242,92,5,.12); color: var(--orange); }
-    .logo-badge { min-height: 96px; border-radius: 22px; border: 1px solid rgba(7,59,99,.08); display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #fff, #f8fafc); padding: 16px; }
-    .logo-badge img { max-width: 100%; max-height: 64px; object-fit: contain; display: block; }
-    .logo-card:hover .logo-badge {
-      box-shadow: 0 16px 30px rgba(15,23,42,.08);
-      border-color: rgba(7,59,99,.14);
-    }
-    .logo-card:hover .logo-badge img {
-      transform: scale(1.03);
-      transition: transform .22s ease;
-    }
-    .service-card h3 { margin: 0; font-size: 24px; letter-spacing: -0.02em; }
-    .service-card p { margin: 14px 0 0; color: var(--muted); line-height: 1.7; }
-    .calculator { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 34px; background: #fff; box-shadow: var(--shadow); }
-    .calc-left, .calc-right { padding: 34px; }
-    .calc-left.dark { background: var(--blue); color: #fff; }
-    .calc-left h3, .calc-right h3 { margin: 0; font-size: 38px; line-height: 1.04; letter-spacing: -0.03em; }
-    .calc-note { font-size: 12px; line-height: 1.6; opacity: .88; margin-top: 18px; }
-    label { display: block; font-size: 14px; margin: 16px 0 8px; }
-    input { width: 100%; height: 50px; border-radius: 16px; border: 1px solid var(--border); padding: 0 16px; font-size: 16px; outline: none; }
-    .calc-left.dark input { background: #fff; color: var(--text); border-color: transparent; }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .stat { padding: 22px; border-radius: 24px; border: 1px solid var(--border); background: #fff; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
-    .stat:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(15, 23, 42, 0.10); border-color: rgba(7,59,99,.12); }
-    .stat.soft-blue { background: linear-gradient(180deg, rgba(7,59,99,.08), rgba(7,59,99,.12)); border-color: transparent; }
-    .stat.soft-orange { background: linear-gradient(180deg, rgba(242,92,5,.10), rgba(242,92,5,.14)); border-color: transparent; }
-    .stat strong { display: block; margin-top: 8px; font-size: 32px; line-height: 1.05; letter-spacing: -0.03em; }
-    .stat small { color: #475569; font-size: 14px; font-weight: 600; }
-    .highlight { margin-top: 14px; border-radius: 28px; padding: 26px; background: linear-gradient(135deg, var(--blue), #0B5A93); color: #fff; }
-    .highlight strong { display: block; margin-top: 8px; font-size: 40px; line-height: 1.02; letter-spacing: -0.03em; }
-    .box { margin-top: 14px; border-radius: 28px; padding: 24px; border: 1px solid var(--border); background: #fff; }
-    .box strong { display: block; margin-top: 8px; font-size: 32px; line-height: 1.05; letter-spacing: -0.03em; }
-    .two-col { grid-template-columns: 1fr 1fr; }
-    .pad-card { padding: 34px; }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-    .tag { padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.14); color: #fff; font-size: 14px; }
-    footer { padding: 18px 0 40px; text-align: center; color: var(--muted); font-size: 14px; }
-    @media (max-width: 1100px) {
-      .services[style*="repeat(5"] { grid-template-columns: repeat(3, minmax(0,1fr)) !important; }
-      .services[style*="repeat(4"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
-    }
-    @media (max-width: 980px) {
-      .hero-grid, .services, .calculator, .two-col { grid-template-columns: 1fr; }
-      .hero-points, .stat-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 720px) {
-      .nav { flex-direction: column; align-items: flex-start; }
-      .logo-title { font-size: 20px; }
-      .lead { font-size: 18px; }
-      .section { padding: 72px 0; }
-      .calc-left, .calc-right, .pad-card, .hero-card { padding: 26px; }
-      h1 { font-size: 42px; }
-      .title-xl { font-size: 34px; }
-      .calc-left h3, .calc-right h3 { font-size: 30px; }
-      .services[style*="repeat(5"], .services[style*="repeat(4"], .services[style*="repeat(3"] { grid-template-columns: 1fr !important; }
-    }
+    :root{--blue:#073B63;--orange:#F25C05;--white:#fff;--soft:#F6F8FB;--text:#0F172A;--muted:#475569;--border:#E2E8F0;--shadow:0 20px 50px rgba(15,23,42,.10);--radius:28px}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:var(--white)}
+    a{text-decoration:none;color:inherit}.container{width:min(1160px,calc(100% - 32px));margin:0 auto}.section{padding:84px 0}.soft{background:var(--soft)}.grid{display:grid;gap:24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;border-radius:18px;font-weight:700;border:1px solid transparent;cursor:pointer;transition:.2s ease}
+    .btn-primary{background:var(--orange);color:#fff}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(242,92,5,.22)}
+    .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.18)}.btn-secondary:hover{background:rgba(255,255,255,.08)}
+    .hero{background:linear-gradient(135deg,var(--blue),#0B5A93);color:#fff;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right, rgba(255,255,255,.18), transparent 30%);pointer-events:none}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0 10px;position:relative;z-index:2}
+    .brand{display:flex;align-items:center;gap:14px}.brand-box{width:70px;height:70px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    .brand-box span{font-size:58px;line-height:1;font-weight:900;color:var(--orange)}.brand-title{font-size:24px;font-weight:900}.brand-sub{font-size:14px;color:rgba(255,255,255,.72)}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding:46px 0 84px;position:relative;z-index:2}
+    h1{margin:0;font-size:clamp(40px,6vw,68px);line-height:.98;letter-spacing:-.04em}.lead{margin-top:22px;font-size:20px;line-height:1.65;color:rgba(255,255,255,.84);max-width:700px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.hero-points{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .point{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.88)}.check{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(242,92,5,.18);color:var(--orange);font-size:13px;font-weight:900}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.hero-card{padding:34px;background:rgba(255,255,255,.97)}
+    .hero-photo{border-radius:24px;background:linear-gradient(135deg, rgba(7,59,99,.08), rgba(242,92,5,.08));border:1px solid rgba(7,59,99,.08);min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);padding:24px}
+    .hero-photo strong{display:block;color:var(--blue);font-size:22px;margin-bottom:8px}.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+    .stat{padding:20px;border-radius:24px;border:1px solid var(--border);background:#fff;transition:transform .2s ease, box-shadow .2s ease}.stat:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(15,23,42,.08)}
+    .stat.soft-orange{background:linear-gradient(180deg, rgba(242,92,5,.10), rgba(242,92,5,.14));border-color:transparent}.stat.soft-blue{background:linear-gradient(180deg, rgba(7,59,99,.08), rgba(7,59,99,.12));border-color:transparent}
+    .stat small{display:block;font-size:13px;font-weight:700;letter-spacing:.02em}.stat strong{display:block;margin-top:8px;font-size:24px;line-height:1.28;letter-spacing:-.02em}
+    .section-head{max-width:820px;margin:0 auto 44px;text-align:center}.eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(242,92,5,.10);color:var(--orange);font-size:13px;font-weight:800;margin-bottom:16px}
+    .title-xl{margin:0;font-size:clamp(32px,4vw,48px);line-height:1.04;letter-spacing:-.03em}.body-lg{font-size:18px;line-height:1.7;color:var(--muted)}
+    .services{grid-template-columns:repeat(3,minmax(0,1fr))}.service-card{padding:28px;border:1px solid transparent;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}.service-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px rgba(15,23,42,.12);border-color:rgba(7,59,99,.08)}
+    .icon{width:50px;height:50px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;background:rgba(7,59,99,.08);color:var(--blue);font-size:22px;margin-bottom:18px}.service-card h3{margin:0;font-size:24px;letter-spacing:-.02em}.service-card p{margin:14px 0 0;color:var(--muted);line-height:1.7}
+    .calculator{display:grid;grid-template-columns:1fr 1fr;border-radius:34px;background:#fff;overflow:hidden;box-shadow:var(--shadow)}.calc-left,.calc-right{padding:34px}.calc-left.dark{background:var(--blue);color:#fff}.calc-left h3,.calc-right h3{margin:0;font-size:38px;line-height:1.04;letter-spacing:-.03em}
+    .calc-note{font-size:12px;line-height:1.6;opacity:.86;margin-top:18px} label{display:block;font-size:14px;margin:16px 0 8px} input{width:100%;height:50px;border-radius:16px;border:1px solid var(--border);padding:0 16px;font-size:16px;outline:none}.calc-left.dark input{background:#fff;color:var(--text);border-color:transparent}
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.metric{padding:22px;border-radius:24px;border:1px solid var(--border);background:#fff}.metric.soft-orange{background:rgba(242,92,5,.10);border-color:transparent}.metric.soft-blue{background:rgba(7,59,99,.08);border-color:transparent}
+    .metric small{display:block;color:var(--muted);font-size:14px;font-weight:600}.metric strong{display:block;margin-top:8px;font-size:32px;line-height:1.06;letter-spacing:-.03em}.highlight{margin-top:14px;border-radius:28px;padding:26px;background:linear-gradient(135deg,var(--blue),#0B5A93);color:#fff}.highlight strong{display:block;margin-top:8px;font-size:40px;line-height:1.02}
+    .box{margin-top:14px;border-radius:28px;padding:24px;border:1px solid var(--border);background:#fff}.box strong{display:block;margin-top:8px;font-size:32px;line-height:1.05}
+    .logos{grid-template-columns:repeat(5,minmax(0,1fr))}.logo-card{padding:24px;text-align:center}.logo-badge{min-height:96px;border-radius:22px;border:1px solid rgba(7,59,99,.08);background:linear-gradient(180deg,#fff,#f8fafc);display:flex;align-items:center;justify-content:center;padding:16px}.logo-badge img{max-width:100%;max-height:64px;object-fit:contain;display:block}.logo-card h3{margin:18px 0 0;font-size:22px}.logo-card p{margin:12px 0 0;color:var(--muted);line-height:1.6}
+    .about{display:grid;grid-template-columns:1fr .95fr;gap:24px;align-items:stretch}.about-copy,.about-photo{padding:34px}.about-copy{background:linear-gradient(135deg, rgba(7,59,99,.06), rgba(242,92,5,.08));border:1px solid rgba(7,59,99,.08)}.about-photo{background:#fff;border:1px solid rgba(7,59,99,.08)}
+    .photo-placeholder{min-height:320px;border-radius:24px;border:1px dashed rgba(7,59,99,.18);background:linear-gradient(135deg, rgba(7,59,99,.04), rgba(242,92,5,.05));display:flex;align-items:center;justify-content:center;text-align:center;padding:28px;color:var(--muted)}.photo-placeholder strong{display:block;color:var(--blue);font-size:22px;margin-bottom:8px}
+    .close-card{padding:48px;text-align:center;background:linear-gradient(135deg,var(--blue),#0B5A93);color:#fff}.close-card p{max-width:640px;margin:16px auto 0;color:rgba(255,255,255,.84);font-size:18px;line-height:1.7}
+    footer{padding:18px 0 40px;text-align:center;color:var(--muted);font-size:14px}.whatsapp-float{position:fixed;right:24px;bottom:24px;width:60px;height:60px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 10px 30px rgba(0,0,0,.22);z-index:999;transition:transform .2s ease}.whatsapp-float:hover{transform:scale(1.06)}
+    @media (max-width:1100px){.logos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media (max-width:980px){.hero-grid,.services,.calculator,.about{grid-template-columns:1fr}.hero-points,.hero-stats,.stat-grid{grid-template-columns:1fr}}
+    @media (max-width:720px){.nav{flex-direction:column;align-items:flex-start}.brand-title{font-size:20px}.section{padding:70px 0}.hero-actions{flex-direction:column;align-items:flex-start}.calc-left,.calc-right,.hero-card,.about-copy,.about-photo,.close-card{padding:26px}.logos{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <section class="hero">
     <div class="container">
       <div class="nav">
-        <div class="logo-wrap">
-          <div class="logo-box"><div class="logo-h">h</div></div>
-          <div>
-            <div class="logo-title">Seguro con Hugo</div>
-            <div class="logo-sub">Protección premium y estrategia patrimonial</div>
-          </div>
+        <div class="brand">
+          <div class="brand-box"><span>h</span></div>
+          <div><div class="brand-title">Seguro con Hugo</div><div class="brand-sub">Protección personalizada y estrategia patrimonial</div></div>
         </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a class="btn btn-secondary" href="#calculadoras">Ver calculadoras</a>
-          <a class="btn btn-secondary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20una%20asesor%C3%ADa%20de%20seguros." target="_blank">WhatsApp</a>
+          <a class="btn btn-secondary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20de%20seguros." target="_blank" rel="noreferrer">WhatsApp</a>
         </div>
       </div>
       <div class="hero-grid">
         <div>
-          <h1>Protege tu presente y construye tu futuro con una estrategia a tu medida.</h1>
-          <p class="lead">Especialista en <strong>Gastos Médicos Mayores</strong> y <strong>Retiro</strong>, con soluciones adicionales en <strong>Vida Mujer</strong>, <strong>seguro educativo</strong>, vivienda, autos y mascotas.</p>
+          <h1>Protege tu salud, tu dinero y tu futuro con una estrategia bien diseñada.</h1>
+          <p class="lead">Especialista en <strong>Gastos Médicos Mayores</strong> y <strong>Retiro</strong>. También te ayudo con <strong>Vida Mujer</strong>, <strong>Seguro Educativo</strong>, vivienda, autos, mascotas y seguro de viajero.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20cotizar%20un%20seguro." target="_blank">Cotiza por WhatsApp</a>
+            <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20cotizar%20un%20seguro." target="_blank" rel="noreferrer">Cotizar por WhatsApp</a>
             <a class="btn btn-secondary" href="tel:+528331407251">833 140 7251</a>
           </div>
           <div class="hero-points">
-            <div class="point"><span class="check">✓</span>Asesoría personalizada y clara</div>
-            <div class="point"><span class="check">✓</span>Enfoque patrimonial y de protección</div>
-            <div class="point"><span class="check">✓</span>Opciones para distintas etapas de vida</div>
-            <div class="point"><span class="check">✓</span>Acompañamiento cuando más importa</div>
+            <div class="point"><span class="check">✓</span>Asesoría clara y personalizada</div>
+            <div class="point"><span class="check">✓</span>Comparación entre aseguradoras</div>
+            <div class="point"><span class="check">✓</span>Estrategia patrimonial aterrizada</div>
+            <div class="point"><span class="check">✓</span>Acompañamiento cercano</div>
           </div>
         </div>
         <div class="card hero-card">
-          <div class="hero-logo"><span>h</span></div>
-          <div class="center" style="margin-top:24px;">
-            <div class="overline">Seguro con Hugo</div>
-            <h2 class="title-xl" style="font-size:40px; margin-top:12px; color: var(--blue);">Estrategia patrimonial clara para proteger tu futuro</h2>
-            <p class="body-lg" style="margin-top:16px;">No se trata solo de contratar una póliza. Se trata de tomar decisiones bien pensadas para proteger salud, patrimonio, familia y futuro.</p>
-          </div>
-          <div class="grid two-col" style="margin-top:20px; gap:14px;">
-            <div class="stat soft-orange" style="position:relative; overflow:hidden;">
-              <div style="position:absolute; inset:auto -18px -30px auto; width:96px; height:96px; border-radius:999px; background:rgba(242,92,5,.10); filter:blur(2px);"></div>
-              <small style="color: var(--orange); letter-spacing:.04em;">Especialidad</small>
-              <strong style="font-size:24px; color: var(--orange); line-height:1.28;">
-                Gastos Médicos Mayores, Retiro, Vida Mujer y Seguro Educativo
-              </strong>
-            </div>
-            <div class="stat soft-blue" style="position:relative; overflow:hidden;">
-              <div style="position:absolute; inset:auto auto -24px -16px; width:90px; height:90px; border-radius:999px; background:rgba(7,59,99,.08); filter:blur(2px);"></div>
-              <small style="color: var(--blue); letter-spacing:.04em;">Coberturas extra</small>
-              <strong style="font-size:24px; color: var(--blue); line-height:1.28;">
-                Daños, autos, mascotas y Seguro de Viajero
-              </strong>
-            </div>
+          <div class="hero-photo"><div><strong>Espacio para tu foto principal</strong>Aquí podemos poner una foto tuya profesional cuando elijas cuál usar.</div></div>
+          <div class="hero-stats">
+            <div class="stat soft-orange"><small style="color:var(--orange)">Especialidad</small><strong style="color:var(--orange)">Gastos Médicos Mayores, Retiro, Vida Mujer y Seguro Educativo</strong></div>
+            <div class="stat soft-blue"><small style="color:var(--blue)">Coberturas extra</small><strong style="color:var(--blue)">Daños, autos, mascotas y Seguro de Viajero</strong></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <section class="section">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Soluciones</span>
-        <h2 class="title-xl">Protección diseñada para cada prioridad</h2>
-        <p class="body-lg">Tus productos principales al frente, con una oferta integral para acompañar distintas necesidades de protección y planeación.</p>
+      <div class="section-head"><span class="eyebrow">Soluciones</span><h2 class="title-xl">Protección diseñada para distintas prioridades</h2><p class="body-lg">Una vista clara de los productos que manejo, sin repetir información de más.</p></div>
+      <div class="grid services">
+        <div class="card service-card"><div class="icon">❤</div><h3>Gastos Médicos Mayores</h3><p>Protección médica privada para cuidar tu salud y tu patrimonio ante enfermedades o accidentes de alto costo.</p></div>
+        <div class="card service-card"><div class="icon">⏳</div><h3>Retiro y planeación patrimonial</h3><p>Estrategias para construir capital, aprovechar beneficios fiscales y llegar al retiro con mayor tranquilidad financiera.</p></div>
+        <div class="card service-card"><div class="icon">♀</div><h3>Plan Vida Mujer</h3><p>Protección especializada para la mujer, con respaldo económico y coberturas relevantes para distintas etapas de vida.</p></div>
+        <div class="card service-card"><div class="icon">🎓</div><h3>Seguro Educativo</h3><p>Planeación para asegurar la educación de tus hijos, con una estrategia financiera pensada para el largo plazo.</p></div>
+        <div class="card service-card"><div class="icon">⌂</div><h3>Daños para vivienda</h3><p>Coberturas para proteger tu casa, departamento o patrimonio inmobiliario frente a eventos imprevistos.</p></div>
+        <div class="card service-card"><div class="icon">🚗</div><h3>Seguro de auto</h3><p>Opciones para proteger tu vehículo, tu responsabilidad civil y tu estabilidad económica en carretera o ciudad.</p></div>
+        <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p></div>
+        <div class="card service-card"><div class="icon">✈️</div><h3>Seguro de Viajero</h3><p>Protección para viajar con mayor tranquilidad ante imprevistos médicos, cancelaciones y eventualidades durante tu trayecto.</p></div>
+        <div class="card service-card"><div class="icon">🛡</div><h3>Protección integral</h3><p>Un análisis completo para ayudarte a elegir lo que realmente necesitas, sin sobreprotegerte ni quedarte corto.</p></div>
       </div>
-     <div class="grid services">
-  <div class="card service-card"><div class="icon">❤</div><h3>Gastos Médicos Mayores</h3><p>Protección médica privada para cuidar tu salud y tu patrimonio ante enfermedades o accidentes de alto costo.</p></div>
-  <div class="card service-card"><div class="icon">⏳</div><h3>Retiro y planeación patrimonial</h3><p>Estrategias para construir capital, aprovechar beneficios fiscales y llegar al retiro con mayor tranquilidad financiera.</p></div>
-  <div class="card service-card"><div class="icon">♀</div><h3>Plan Vida Mujer</h3><p>Protección especializada para la mujer, con respaldo económico y coberturas relevantes para distintas etapas de vida.</p></div>
-  <div class="card service-card"><div class="icon">🎓</div><h3>Seguro Educativo</h3><p>Planeación para asegurar la educación de tus hijos, con una estrategia financiera pensada para el largo plazo.</p></div>
-  <div class="card service-card"><div class="icon">⌂</div><h3>Daños para vivienda</h3><p>Coberturas para proteger tu casa, departamento o patrimonio inmobiliario frente a eventos imprevistos.</p></div>
-  <div class="card service-card"><div class="icon">🚗</div><h3>Seguro de auto</h3><p>Opciones para proteger tu vehículo, tu responsabilidad civil y tu estabilidad económica en carretera o ciudad.</p></div>
-  <div class="card service-card"><div class="icon">🐾</div><h3>Seguro para mascotas</h3><p>Respaldo para esos miembros de la familia que también merecen atención, prevención y apoyo financiero.</p></div>
-  <div class="card service-card"><div class="icon">✈️</div><h3>Seguro de Viajero</h3><p>Protección para viajar con mayor tranquilidad ante imprevistos médicos, cancelaciones y eventualidades durante tu trayecto.</p></div>
-  <div class="card service-card"><div class="icon">🛡</div><h3>Protección integral</h3><p>Un análisis completo para ayudarte a elegir lo que realmente necesitas, sin sobreprotegerte ni quedarte corto.</p></div>
-</div>
     </div>
   </section>
-
-  <section id="calculadoras" class="section section-soft">
+  <section id="calculadoras" class="section soft">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Calculadoras</span>
-        <h2 class="title-xl">Herramientas que convierten la asesoría en números claros</h2>
-        <p class="body-lg">Sí, aquí van tus calculadoras. Porque una buena venta premium también necesita claridad, proyección y argumentos sólidos.</p>
-      </div>
+      <div class="section-head"><span class="eyebrow">Calculadoras</span><h2 class="title-xl">Números claros para abrir la conversación correcta</h2><p class="body-lg">Conservamos las calculadoras porque sí te diferencian y ayudan a que el prospecto llegue mejor preparado a WhatsApp.</p></div>
       <div class="calculator" style="margin-bottom:24px;">
         <div class="calc-left dark">
-          <div class="overline" style="color:rgba(255,255,255,.7);">Calculadora de retiro en UDIS</div>
-          <h3 style="color:#fff; margin-top:10px;">Visualiza tu estrategia de retiro con inflación integrada</h3>
-          <p class="body-lg" style="color:rgba(255,255,255,.78);">Compara un ahorro tradicional en pesos contra una estrategia indexada a UDIS, diseñada para proteger el poder adquisitivo y buscar crecimiento real a largo plazo.</p>
-          <label for="age">Edad actual</label>
-          <input id="age" type="number" value="30" />
-          <label for="retireAge">Edad objetivo de retiro</label>
-          <input id="retireAge" type="number" value="65" />
-          <label for="monthly">Ahorro mensual inicial</label>
-          <input id="monthly" type="number" value="3000" />
-          <label for="inflation">Inflación anual estimada (%)</label>
-          <input id="inflation" type="number" step="0.1" value="4.0" />
-          <div class="calc-note">Proyección ilustrativa con fines informativos. En el escenario UDIS se asume actualización anual por inflación y un crecimiento real estimado adicional. No representa una oferta contractual ni garantiza rendimientos futuros.</div>
+          <div class="overline" style="color:rgba(255,255,255,.7)">Calculadora de retiro en UDIS</div>
+          <h3 style="color:#fff;margin-top:10px;">Visualiza tu estrategia de retiro con inflación integrada</h3>
+          <p class="body-lg" style="color:rgba(255,255,255,.78)">Compara un ahorro tradicional en pesos contra una estrategia indexada a UDIS, diseñada para proteger el poder adquisitivo y buscar crecimiento real a largo plazo.</p>
+          <label for="age">Edad actual</label><input id="age" type="number" value="30" />
+          <label for="retireAge">Edad objetivo de retiro</label><input id="retireAge" type="number" value="65" />
+          <label for="monthly">Ahorro mensual inicial</label><input id="monthly" type="number" value="3000" />
+          <label for="inflation">Inflación anual estimada (%)</label><input id="inflation" type="number" step="0.1" value="4.0" />
+          <div class="calc-note">Proyección ilustrativa. En el escenario UDIS se asume actualización anual por inflación y un crecimiento real estimado adicional del 1%.</div>
         </div>
         <div class="calc-right">
           <div class="stat-grid">
-            <div class="stat soft-orange"><small>Aportación estimada en pesos</small><strong id="contributed">$0</strong></div>
-            <div class="stat soft-blue"><small>Horizonte de ahorro</small><strong id="years">0 años</strong></div>
-            <div class="stat"><small>Ahorro tradicional en pesos</small><strong id="traditional">$0</strong></div>
-            <div class="stat"><small>Plan indexado a UDIS</small><strong id="udisPlan" style="color:var(--orange);">$0</strong></div>
+            <div class="metric soft-orange"><small>Aportación estimada en pesos</small><strong id="contributed">$0</strong></div>
+            <div class="metric soft-blue"><small>Horizonte de ahorro</small><strong id="years">0 años</strong></div>
+            <div class="metric"><small>Ahorro tradicional en pesos</small><strong id="traditional">$0</strong></div>
+            <div class="metric"><small>Plan indexado a UDIS</small><strong id="udisPlan" style="color:var(--orange)">$0</strong></div>
           </div>
-          <div class="highlight">
-            <small>Ventaja estimada del esquema en UDIS</small>
-            <strong id="gain">$0</strong>
-            <div style="margin-top:10px; color:rgba(255,255,255,.84);">La aportación sube con inflación para buscar conservar poder adquisitivo y generar crecimiento real en el tiempo.</div>
-          </div>
-          <div class="box">
-            <small>Valor estimado en pesos de hoy</small>
-            <strong id="realValue">$0</strong>
-            <div style="margin-top:10px; color:var(--muted);">Referencia aproximada del monto final del plan en UDIS expresado en poder adquisitivo actual.</div>
-          </div>
+          <div class="highlight"><small>Ventaja estimada del esquema en UDIS</small><strong id="gain">$0</strong><div style="margin-top:10px;color:rgba(255,255,255,.84)">Esto es una proyección. La diferencia real está en cómo estructuras tu estrategia.</div></div>
+          <div class="box"><small>Valor estimado en pesos de hoy</small><strong id="realValue">$0</strong><div style="margin-top:10px;color:var(--muted)">Referencia aproximada del monto final expresado en poder adquisitivo actual.</div></div>
+          <a class="btn btn-primary" style="margin-top:18px" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20revisar%20mi%20estrategia%20de%20retiro." target="_blank" rel="noreferrer">Quiero revisar mi caso real</a>
         </div>
       </div>
       <div class="calculator">
         <div class="calc-right">
-          <div class="overline" style="color:var(--orange);">Calculadora fiscal</div>
+          <div class="overline" style="color:var(--orange)">Calculadora fiscal</div>
           <h3 style="margin-top:10px;">Descubre el posible beneficio fiscal</h3>
           <p class="body-lg">Simula cuánto podrías deducir y cuál sería el costo real estimado de empezar un plan orientado al retiro este año.</p>
-          <label for="income">Ingresos brutos anuales</label>
-          <input id="income" type="number" value="600000" />
-          <label for="monthlyContribution">Aportación mensual</label>
-          <input id="monthlyContribution" type="number" value="4000" />
-          <div class="stat soft-orange" style="margin-top:18px;"><small>Tope estimado deducible</small><strong id="legalCap" style="color:var(--text);">$0</strong></div>
-          <div class="calc-note" style="color:var(--muted); opacity:1;">Estimación ilustrativa basada en topes fiscales generales. La estrategia final debe revisarse conforme a tu perfil y situación fiscal.</div>
+          <label for="income">Ingresos brutos anuales</label><input id="income" type="number" value="600000" />
+          <label for="monthlyContribution">Aportación mensual</label><input id="monthlyContribution" type="number" value="4000" />
+          <div class="metric soft-orange" style="margin-top:18px"><small>Tope estimado deducible</small><strong id="legalCap" style="color:var(--text)">$0</strong></div>
+          <div class="calc-note" style="color:var(--muted);opacity:1">Estimación ilustrativa basada en topes fiscales generales. La estrategia final debe revisarse conforme a tu perfil y situación fiscal.</div>
         </div>
         <div class="calc-left dark">
           <div class="stat-grid">
-            <div class="stat"><small>Inversión anual</small><strong id="annualContribution" style="color:var(--text);">$0</strong></div>
-            <div class="stat"><small>Deducción estimada</small><strong id="estimatedRefund" style="color:var(--text);">$0</strong><div style="margin-top:8px; color:#475569; font-size:12px; font-weight:600;" id="estimatedRate">Tasa estimada usada: 0%</div></div>
+            <div class="metric"><small>Inversión anual</small><strong id="annualContribution" style="color:var(--text)">$0</strong></div>
+            <div class="metric"><small>Deducción estimada</small><strong id="estimatedRefund" style="color:var(--text)">$0</strong><div style="margin-top:8px;color:#475569;font-size:12px;font-weight:600" id="estimatedRate">Tasa estimada usada: 0%</div></div>
           </div>
-          <div class="highlight" style="background:linear-gradient(135deg, var(--orange), #FF7A1A); margin-top:18px;">
-            <small>Costo real estimado</small>
-            <strong id="realCost">$0</strong>
-          </div>
-          <a class="btn" style="width:100%; margin-top:18px; background:#fff; color:var(--text);" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20revisar%20mi%20caso%20de%20retiro." target="_blank">Quiero revisar mi caso con Hugo</a>
+          <div class="highlight" style="background:linear-gradient(135deg,var(--orange),#FF7A1A);margin-top:18px"><small>Costo real estimado</small><strong id="realCost">$0</strong></div>
+          <a class="btn" style="width:100%;margin-top:18px;background:#fff;color:var(--text)" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20revisar%20mi%20caso%20fiscal." target="_blank" rel="noreferrer">Quiero revisar mi caso con Hugo</a>
         </div>
       </div>
     </div>
   </section>
-
-  <section class="section" style="padding-bottom:32px;">
+  <section class="section">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Aseguradoras</span>
-        <h2 class="title-xl">Catálogo de aseguradoras que manejo</h2>
-        <p class="body-lg">Trabajo con un portafolio de aseguradoras reconocidas para ayudarte a comparar opciones y elegir la solución que mejor se adapte a tu perfil, objetivo y presupuesto.</p>
+      <div class="section-head"><span class="eyebrow">Aseguradoras</span><h2 class="title-xl">Catálogo de aseguradoras que manejo</h2><p class="body-lg">Solo una sección de confianza, limpia y directa. Trabajo con varias aseguradoras para ayudarte a comparar y elegir mejor.</p></div>
+      <div class="grid logos">
+        <div class="card logo-card"><div class="logo-badge"><img src="Logo-mapfre-fondo-transparente.png" alt="MAPFRE"></div><h3>MAPFRE</h3><p>GMM, vida, autos y daños.</p></div>
+        <div class="card logo-card"><div class="logo-badge"><img src="logosm.png" alt="Seguros Monterrey"></div><h3>Seguros Monterrey</h3><p>Vida, GMM, Vida Mujer y educativo.</p></div>
+        <div class="card logo-card"><div class="logo-badge"><img src="Logo-seguros-Atlas-copia.webp" alt="Seguros Atlas"></div><h3>Seguros Atlas</h3><p>Vida, GMM, autos, hogar y educativo.</p></div>
+        <div class="card logo-card"><div class="logo-badge"><img src="QUALITAS-Seguros-3.png" alt="Quálitas"></div><h3>Quálitas</h3><p>Especialista en seguro automotriz.</p></div>
+        <div class="card logo-card"><div class="logo-badge"><img src="logosegurosana.png" alt="Seguros ANA"></div><h3>Seguros ANA</h3><p>Opciones para auto y protección patrimonial.</p></div>
       </div>
-      <div class="grid services" style="grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom:24px;">
-        <div class="card service-card center logo-card"><div class="logo-badge"><img src="Logo-mapfre-fondo-transparente.png" alt="MAPFRE"></div><h3 style="font-size:22px; margin-top:18px;">MAPFRE</h3><p>GMM, vida, autos y daños.</p></div>
-        <div class="card service-card center logo-card"><div class="logo-badge"><img src="logosm.png" alt="Seguros Monterrey"></div><h3 style="font-size:22px; margin-top:18px;">Seguros Monterrey</h3><p>Vida, GMM, Vida Mujer y educativo.</p></div>
-        <div class="card service-card center logo-card"><div class="logo-badge"><img src="Logo-seguros-Atlas-copia.webp" alt="Seguros Atlas"></div><h3 style="font-size:22px; margin-top:18px;">Seguros Atlas</h3><p>Vida, GMM, autos, hogar y educativo.</p></div>
-        <div class="card service-card center logo-card"><div class="logo-badge"><img src="QUALITAS-Seguros-3.png" alt="Quálitas"></div><h3 style="font-size:22px; margin-top:18px;">Quálitas</h3><p>Especialista en seguro automotriz.</p></div>
-        <div class="card service-card center logo-card"><div class="logo-badge"><img src="logosegurosana.png" alt="Seguros ANA"></div><h3 style="font-size:22px; margin-top:18px;">Seguros ANA</h3><p>Opciones para auto y protección patrimonial.</p></div>
-      </div>
-      <div class="section-head" style="margin-top:12px; margin-bottom:34px;">
-        <p class="body-lg">La propuesta es clara: no se trata de empujarte una sola compañía, sino de presentarte el catálogo que manejo y recomendarte la alternativa correcta para tu caso.</p>
-      </div>
+      <div class="section-head" style="margin-top:24px;margin-bottom:0"><p class="body-lg">No trabajo para una sola compañía. Trabajo para ayudarte a elegir bien.</p></div>
     </div>
   </section>
-
-  <section class="section" style="padding-top:0;">
+  <section class="section soft">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Rutas de cotización</span>
-        <h2 class="title-xl">Elige el tipo de protección que quieres revisar</h2>
-        <p class="body-lg">Accesos directos por producto para que cada prospecto llegue más rápido a la conversación correcta por WhatsApp.</p>
-      </div>
-      <div class="grid services" style="grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom:24px;">
-        <a class="card service-card" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20cotizar%20Gastos%20M%C3%A9dicos%20Mayores." target="_blank"><div class="icon">❤</div><h3>Quiero GMM</h3><p>Revisar opciones de Gastos Médicos Mayores con enfoque patrimonial.</p></a>
-        <a class="card service-card" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20planear%20mi%20retiro." target="_blank"><div class="icon">⏳</div><h3>Quiero Retiro</h3><p>Explorar una estrategia de ahorro e indexación para retiro.</p></a>
-        <a class="card service-card" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20del%20Plan%20Vida%20Mujer." target="_blank"><div class="icon">♀</div><h3>Quiero Vida Mujer</h3><p>Recibir información del plan enfocado en protección para la mujer.</p></a>
-        <a class="card service-card" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20del%20seguro%20educativo." target="_blank"><div class="icon">🎓</div><h3>Quiero Educativo</h3><p>Revisar una estrategia para asegurar la educación de mis hijos.</p></a>
-      </div>
-    </div>
-    <div class="container grid two-col">
-      <div class="card pad-card">
-        <div class="overline" style="color:var(--orange);">¿Por qué trabajar conmigo?</div>
-        <h2 class="title-xl" style="margin-top:12px;">Asesoría clara, cercana y bien estructurada</h2>
-        <p class="body-lg">Mi enfoque es ayudarte a tomar decisiones inteligentes, sin presión y con una visión completa de tu patrimonio.</p>
-        <p class="body-lg">Priorizo soluciones que hagan sentido para tu etapa de vida, tu capacidad financiera y el nivel de protección que realmente necesitas.</p>
-        <p class="body-lg">Cuando una estrategia está bien construida, el seguro deja de sentirse como gasto y empieza a verse como herramienta.</p>
-      </div>
-      <div class="card" style="overflow:hidden;">
-        <div class="pad-card" style="height:100%; background:linear-gradient(135deg, var(--orange), #FF7A1A); color:#fff;">
-          <div class="overline" style="color:rgba(255,255,255,.82);">Mensaje de marca</div>
-          <h2 class="title-xl" style="margin-top:12px; color:#fff;">Protección seria para personas que piensan a largo plazo</h2>
-          <p class="body-lg" style="color:rgba(255,255,255,.9);">Desde gastos médicos y retiro hasta Vida Mujer, educativo, vivienda, autos y mascotas, la meta es la misma: que tu tranquilidad no dependa de la suerte.</p>
-          <div class="tag-row">
-            <span class="tag">GMM</span><span class="tag">Retiro</span><span class="tag">Vida Mujer</span><span class="tag">Educativo</span><span class="tag">Vivienda</span><span class="tag">Autos</span><span class="tag">Mascotas</span>
-          </div>
+      <div class="about">
+        <div class="card about-copy">
+          <span class="eyebrow">Sobre Hugo</span><h2 class="title-xl">Asesoría clara, cercana y bien aterrizada</h2>
+          <p class="body-lg">Mi enfoque es ayudarte a tomar decisiones inteligentes, sin presión y con una visión completa de tu patrimonio.</p>
+          <p class="body-lg">Me especializo en Gastos Médicos Mayores y Retiro, sin dejar de lado soluciones como Vida Mujer, Seguro Educativo, vivienda, autos, mascotas y seguro de viajero.</p>
+          <p class="body-lg">Mi prioridad no es vender por vender, sino ayudarte a entender qué te conviene y acompañarte a elegir una estrategia correcta.</p>
         </div>
+        <div class="card about-photo"><div class="photo-placeholder"><div><strong>Espacio para tu segunda foto</strong>Aquí podemos poner una foto tuya profesional o una imagen más cercana contigo cuando elijas cuál usar.</div></div></div>
       </div>
     </div>
   </section>
-
-  <section class="section" style="padding-top:8px; padding-bottom:32px;">
-    <div class="container grid two-col" style="align-items:stretch;">
-      <div class="card pad-card" style="background:linear-gradient(135deg, rgba(7,59,99,.06), rgba(242,92,5,.08)); border:1px solid rgba(7,59,99,.08);">
-        <div class="overline" style="color:var(--orange);">Acerca de mí</div>
-        <h2 class="title-xl" style="margin-top:12px;">Soy Hugo y mi enfoque es ayudarte a decidir bien</h2>
-        <p class="body-lg">Trabajo desde una asesoría clara, personalizada y orientada a proteger lo que más valoras: tu salud, tu familia, tu patrimonio y tus metas de largo plazo.</p>
-        <p class="body-lg">Me especializo en <strong>Gastos Médicos Mayores</strong> y <strong>Retiro</strong>, sin dejar de lado soluciones como <strong>Vida Mujer</strong>, <strong>Seguro Educativo</strong>, vivienda, autos y mascotas.</p>
-        <p class="body-lg">Mi prioridad no es vender por vender, sino ayudarte a entender qué te conviene, con una propuesta seria, honesta y bien aterrizada a tu realidad.</p>
-        <div class="tag-row" style="margin-top:22px;">
-          <span class="tag" style="background:rgba(7,59,99,.9);">Asesoría clara</span>
-          <span class="tag" style="background:rgba(7,59,99,.9);">Enfoque patrimonial</span>
-          <span class="tag" style="background:rgba(7,59,99,.9);">Atención personalizada</span>
-        </div>
-      </div>
-      <div class="card pad-card" style="background:white; border:1px solid rgba(7,59,99,.08);">
-        <div class="overline" style="color:var(--orange);">Mi forma de trabajar</div>
-        <h2 class="title-xl" style="margin-top:12px;">Una recomendación correcta vale más que una cotización rápida</h2>
-        <div class="grid" style="gap:14px; margin-top:22px;">
-          <div class="stat soft-blue"><small>1. Diagnóstico</small><strong style="font-size:24px; color:var(--text);">Entiendo tu prioridad</strong></div>
-          <div class="stat soft-orange"><small>2. Comparación</small><strong style="font-size:24px; color:var(--text);">Reviso opciones contigo</strong></div>
-          <div class="stat"><small>3. Recomendación</small><strong style="font-size:24px; color:var(--text);">Te propongo lo que sí hace sentido</strong></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:8px; padding-bottom:24px;">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Confianza</span>
-        <h2 class="title-xl">Lo que valoran mis clientes</h2>
-        <p class="body-lg">Una buena asesoría no solo se nota en la cotización, también en la claridad, el acompañamiento y la tranquilidad que deja la decisión.</p>
-      </div>
-      <div class="grid services" style="grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom:12px;">
-        <div class="card service-card"><div class="icon">★</div><h3>Atención clara</h3><p>"Me gustó que me explicaron todo con calma y sin empujarme algo que no necesitaba."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en protección personal</p></div>
-        <div class="card service-card"><div class="icon">★</div><h3>Visión de largo plazo</h3><p>"No sentí que solo me estuvieran vendiendo un seguro; realmente revisamos una estrategia para mi futuro."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en retiro</p></div>
-        <div class="card service-card"><div class="icon">★</div><h3>Confianza al decidir</h3><p>"Comparar varias opciones conmigo hizo mucho más fácil elegir bien y entender por qué una sí me convenía."</p><p style="margin-top:14px; font-weight:700; color:var(--blue);">Cliente asesorado en protección familiar</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0; padding-bottom:32px;">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Preguntas frecuentes</span>
-        <h2 class="title-xl">Dudas comunes antes de contratar</h2>
-        <p class="body-lg">Resolvemos las dudas más comunes antes de que tomes una decisión.</p>
-      </div>
-      <div class="grid" style="gap:16px; max-width:980px; margin:0 auto;">
-        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿Trabajas con una sola aseguradora?</h3><p class="body-lg" style="margin:0;">No. Trabajo con un catálogo de aseguradoras para comparar alternativas y recomendar la opción que mejor se ajuste a tu perfil, objetivo y presupuesto.</p></div>
-        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿Cuáles son tus productos principales?</h3><p class="body-lg" style="margin:0;">Mi enfoque principal está en Gastos Médicos Mayores y Retiro, además de Vida Mujer, seguro educativo, vivienda, autos y mascotas.</p></div>
-        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿La asesoría tiene costo?</h3><p class="body-lg" style="margin:0;">La primera conversación está pensada para entender tu necesidad, orientarte y revisar contigo qué tipo de protección o estrategia hace sentido.</p></div>
-        <div class="card pad-card"><h3 style="margin:0 0 12px; font-size:24px;">¿También me ayudas a comparar opciones?</h3><p class="body-lg" style="margin:0;">Sí. La idea es que no elijas a ciegas. Revisamos diferencias relevantes de cobertura, objetivo y estructura para tomar una decisión bien sustentada.</p></div>
-      </div>
-    </div>
-  </section>
-
   <section class="container" style="padding-bottom:88px;">
-    <div class="card" style="overflow:hidden;">
-      <div style="padding:48px; text-align:center; background:linear-gradient(135deg, var(--blue), #0B5A93); color:white;">
-        <div class="overline" style="color:rgba(255,255,255,.7);">Asesoría personalizada</div>
-        <h2 class="title-xl" style="margin-top:12px; color:white;">Hablemos de tu estrategia ideal</h2>
-        <p class="body-lg" style="color:rgba(255,255,255,.85); max-width:600px; margin:16px auto 0;">Cada persona necesita una solución distinta. Escríbeme y revisamos juntos qué tipo de protección hace sentido para ti.</p>
-        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:32px;">
-          <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20una%20asesor%C3%ADa%20personalizada." target="_blank">Enviar WhatsApp</a>
-          <a class="btn btn-secondary" href="tel:+528331407251">Llamar ahora</a>
-        </div>
-        <div style="margin-top:28px; font-size:14px; color:rgba(255,255,255,.7);">Atención directa · Respuesta rápida · Asesoría clara</div>
+    <div class="card close-card">
+      <div class="overline" style="color:rgba(255,255,255,.72)">Contacto</div>
+      <h2 class="title-xl" style="color:#fff;margin-top:12px">Hablemos de la estrategia que sí hace sentido para ti</h2>
+      <p>Puedes seguir comparando opciones o podemos revisar juntos qué tipo de protección y planeación te conviene más.</p>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:30px">
+        <a class="btn btn-primary" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20una%20asesor%C3%ADa%20personalizada." target="_blank" rel="noreferrer">Enviar WhatsApp</a>
+        <a class="btn btn-secondary" href="tel:+528331407251">Llamar ahora</a>
       </div>
     </div>
   </section>
-
-  <footer>Seguro con Hugo · Asesoría premium en GMM, retiro, Vida Mujer, educativo y protección patrimonial</footer>
-
+  <footer>Seguro con Hugo · Asesoría personalizada en protección y planeación patrimonial</footer>
+  <a href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20de%20seguros." class="whatsapp-float" target="_blank" rel="noreferrer" aria-label="WhatsApp">💬</a>
   <script>
-    const money = (value) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(Number.isFinite(value) ? value : 0);
-    function retirementFV(pmt, r, n) {
-      if (n <= 0) return 0;
-      if (r === 0) return pmt * n;
-      return pmt * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
-    }
-    function futureValueGrowingMonthly(initialMonthly, monthlyRate, annualGrowthRate, months) {
-      let balance = 0;
-      for (let i = 0; i < months; i++) {
-        const yearIndex = Math.floor(i / 12);
-        const contribution = initialMonthly * Math.pow(1 + annualGrowthRate, yearIndex);
-        balance = (balance + contribution) * (1 + monthlyRate);
-      }
-      return balance;
-    }
-    function futureValueGrowingContributions(initialMonthly, annualGrowthRate, months) {
-      let total = 0;
-      for (let i = 0; i < months; i++) {
-        const yearIndex = Math.floor(i / 12);
-        total += initialMonthly * Math.pow(1 + annualGrowthRate, yearIndex);
-      }
-      return total;
-    }
-    function updateRetirement() {
-      const age = Number(document.getElementById('age').value) || 0;
-      const retireAge = Number(document.getElementById('retireAge').value) || 0;
-      const monthly = Number(document.getElementById('monthly').value) || 0;
-      const inflation = (Number(document.getElementById('inflation').value) || 0) / 100;
-      const months = Math.max((retireAge - age) * 12, 0);
-      const traditional = retirementFV(monthly, 0.04 / 12, months);
-      const udisNominalRate = ((1 + inflation) * (1 + 0.01)) - 1;
-      const udisPlan = futureValueGrowingMonthly(monthly, udisNominalRate / 12, inflation, months);
-      const contributed = futureValueGrowingContributions(monthly, inflation, months);
-      const gain = udisPlan - traditional;
-      const realValue = udisPlan / Math.pow(1 + inflation, months / 12);
-      document.getElementById('contributed').textContent = money(contributed);
-      document.getElementById('years').textContent = Math.round(months / 12) + ' años';
-      document.getElementById('traditional').textContent = money(traditional);
-      document.getElementById('udisPlan').textContent = money(udisPlan);
-      document.getElementById('gain').textContent = money(gain);
-      document.getElementById('realValue').textContent = money(realValue);
-    }
-    function updateFiscal() {
-      const income = Number(document.getElementById('income').value) || 0;
-      const monthlyContribution = Number(document.getElementById('monthlyContribution').value) || 0;
-      const annualContribution = monthlyContribution * 12;
-      const legalCap = Math.min(income * 0.1, 206000);
-      const deductible = Math.min(annualContribution, legalCap);
-      const estimatedRate = income > 1000000 ? 0.30 : income > 500000 ? 0.24 : 0.21;
-      const estimatedRefund = deductible * estimatedRate;
-      const realCost = annualContribution - estimatedRefund;
-      document.getElementById('legalCap').textContent = money(legalCap);
-      document.getElementById('annualContribution').textContent = money(annualContribution);
-      document.getElementById('estimatedRefund').textContent = money(estimatedRefund);
-      document.getElementById('estimatedRate').textContent = 'Tasa estimada usada: ' + Math.round(estimatedRate * 100) + '%';
-      document.getElementById('realCost').textContent = money(realCost);
-    }
-    ['age','retireAge','monthly','inflation'].forEach(id => document.getElementById(id).addEventListener('input', updateRetirement));
-    ['income','monthlyContribution'].forEach(id => document.getElementById(id).addEventListener('input', updateFiscal));
-    updateRetirement();
-    updateFiscal();
+    const money = (value) => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(Number.isFinite(value)?value:0);
+    function retirementFV(pmt,r,n){if(n<=0)return 0;if(r===0)return pmt*n;return pmt*(((Math.pow(1+r,n)-1)/r)*(1+r))}
+    function futureValueGrowingMonthly(initialMonthly,monthlyRate,annualGrowthRate,months){let balance=0;for(let i=0;i<months;i++){const yearIndex=Math.floor(i/12);const contribution=initialMonthly*Math.pow(1+annualGrowthRate,yearIndex);balance=(balance+contribution)*(1+monthlyRate)}return balance}
+    function futureValueGrowingContributions(initialMonthly,annualGrowthRate,months){let total=0;for(let i=0;i<months;i++){const yearIndex=Math.floor(i/12);total+=initialMonthly*Math.pow(1+annualGrowthRate,yearIndex)}return total}
+    function updateRetirement(){const age=Number(document.getElementById('age').value)||0;const retireAge=Number(document.getElementById('retireAge').value)||0;const monthly=Number(document.getElementById('monthly').value)||0;const inflation=(Number(document.getElementById('inflation').value)||0)/100;const months=Math.max((retireAge-age)*12,0);const traditional=retirementFV(monthly,0.04/12,months);const udisNominalRate=((1+inflation)*(1+0.01))-1;const udisPlan=futureValueGrowingMonthly(monthly,udisNominalRate/12,inflation,months);const contributed=futureValueGrowingContributions(monthly,inflation,months);const gain=udisPlan-traditional;const realValue=udisPlan/Math.pow(1+inflation,months/12);document.getElementById('contributed').textContent=money(contributed);document.getElementById('years').textContent=Math.round(months/12)+' años';document.getElementById('traditional').textContent=money(traditional);document.getElementById('udisPlan').textContent=money(udisPlan);document.getElementById('gain').textContent=money(gain);document.getElementById('realValue').textContent=money(realValue)}
+    function updateFiscal(){const income=Number(document.getElementById('income').value)||0;const monthlyContribution=Number(document.getElementById('monthlyContribution').value)||0;const annualContribution=monthlyContribution*12;const legalCap=Math.min(income*0.1,206000);const deductible=Math.min(annualContribution,legalCap);const estimatedRate=income>1000000?0.30:income>500000?0.24:0.21;const estimatedRefund=deductible*estimatedRate;const realCost=annualContribution-estimatedRefund;document.getElementById('legalCap').textContent=money(legalCap);document.getElementById('annualContribution').textContent=money(annualContribution);document.getElementById('estimatedRefund').textContent=money(estimatedRefund);document.getElementById('estimatedRate').textContent='Tasa estimada usada: '+Math.round(estimatedRate*100)+'%';document.getElementById('realCost').textContent=money(realCost)}
+    ['age','retireAge','monthly','inflation'].forEach(id=>document.getElementById(id).addEventListener('input',updateRetirement));
+    ['income','monthlyContribution'].forEach(id=>document.getElementById(id).addEventListener('input',updateFiscal));
+    updateRetirement();updateFiscal();
   </script>
-
-  <a href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20informaci%C3%B3n%20de%20seguros." class="whatsapp-float" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-    💬
-  </a>
-
-  <style>
-    .whatsapp-float{
-      position:fixed;
-      right:24px;
-      bottom:24px;
-      width:60px;
-      height:60px;
-      border-radius:999px;
-      background:#25D366;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:28px;
-      box-shadow:0 10px 30px rgba(0,0,0,.22);
-      z-index:999;
-      transition:transform .2s ease;
-    }
-    .whatsapp-float:hover{ transform:scale(1.06); }
-  </style>
 </body>
 </html>
