@@ -102,28 +102,27 @@
   </section>
   <section id="calculadoras" class="section soft">
     <div class="container">
-      <div class="section-head"><span class="eyebrow">Calculadoras</span><h2 class="title-xl">Números claros para abrir la conversación correcta</h2><p class="body-lg"></p></div>
+      <div class="section-head"><span class="eyebrow">Calculadoras</span><h2 class="title-xl">Una proyección más cercana a tu producto real</h2><p class="body-lg">Esta calculadora usa la lógica comercial de tus planes en UDIS para estimar aportación y valor futuro al retiro.</p></div>
       <div class="calculator" style="margin-bottom:24px;">
         <div class="calc-left dark">
           <div class="overline" style="color:rgba(255,255,255,.7)">Calculadora de retiro en UDIS</div>
-          <h3 style="color:#fff;margin-top:10px;">Visualiza tu estrategia de retiro con inflación integrada</h3>
-          <p class="body-lg" style="color:rgba(255,255,255,.78)">Compara un ahorro tradicional en pesos contra una estrategia indexada a UDIS, diseñada para proteger el poder adquisitivo y buscar crecimiento real a largo plazo.</p>
-          <label for="age">Edad actual</label><input id="age" type="number" value="30" />
-          <label for="retireAge">Edad objetivo de retiro</label><input id="retireAge" type="number" value="65" />
-          <label for="monthly">Ahorro mensual inicial</label><input id="monthly" type="number" value="3000" />
-          <label for="inflation">Inflación anual estimada (%)</label><input id="inflation" type="number" step="0.1" value="4.0" />
-          <div class="calc-note">Proyección ilustrativa. En el escenario UDIS se asume actualización anual por inflación y un crecimiento real estimado adicional del 1%.</div>
+          <h3 style="color:#fff;margin-top:10px;">Elige tu edad, sexo y plazo de pago</h3>
+          <p class="body-lg" style="color:rgba(255,255,255,.78)">La proyección considera el comportamiento real de los planes, inflación fija del 4% y conversión del fondo final con el valor proyectado de la UDI al momento del retiro.</p>
+          <label for="retiroEdad">Edad actual</label><input id="retiroEdad" type="number" value="32" min="18" max="60" />
+          <label for="retiroSexo">Sexo</label><select id="retiroSexo"><option value="M">Hombre</option><option value="F">Mujer</option></select>
+          <label for="retiroPlan">Plan</label><select id="retiroPlan"><option value="65">Pagar hasta los 65 años</option><option value="15">Pagar por 15 años</option><option value="10">Pagar por 10 años</option></select>
+          <div class="calc-note">La calculadora intenta usar el valor oficial más reciente de la UDI si agregas tu token de Banxico. Mientras tanto usa un valor de respaldo editable en código.</div>
         </div>
         <div class="calc-right">
           <div class="stat-grid">
-            <div class="metric soft-orange"><small>Aportación estimada en pesos</small><strong id="contributed">$0</strong></div>
-            <div class="metric soft-blue"><small>Horizonte de ahorro</small><strong id="years">0 años</strong></div>
-            <div class="metric"><small>Ahorro tradicional en pesos</small><strong id="traditional">$0</strong></div>
-            <div class="metric"><small>Plan indexado a UDIS</small><strong id="udisPlan" style="color:var(--orange)">$0</strong></div>
+            <div class="metric soft-orange"><small>Aportación mensual estimada</small><strong id="retiroMensual">$0</strong></div>
+            <div class="metric soft-blue"><small>Aportación total estimada</small><strong id="retiroTotal">$0</strong></div>
+            <div class="metric"><small>Valor proyectado</small><strong id="retiroUdis">0 UDIS</strong></div>
+            <div class="metric"><small>UDI usada hoy</small><strong id="udiHoyDisplay">$0.00</strong></div>
           </div>
-          <div class="highlight"><small>Ventaja estimada del esquema en UDIS</small><strong id="gain">$0</strong><div style="margin-top:10px;color:rgba(255,255,255,.84)">Esto es una proyección. La diferencia real está en cómo estructuras tu estrategia.</div></div>
-          <div class="box"><small>Valor estimado en pesos de hoy</small><strong id="realValue">$0</strong><div style="margin-top:10px;color:var(--muted)">Referencia aproximada del monto final expresado en poder adquisitivo actual.</div></div>
-          <a class="btn btn-primary" style="margin-top:18px" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20revisar%20mi%20estrategia%20de%20retiro." target="_blank" rel="noreferrer">Quiero revisar mi caso real</a>
+          <div class="highlight"><small>Monto estimado al retiro</small><strong id="retiroPesos">$0</strong><div style="margin-top:10px;color:rgba(255,255,255,.84)">Conversión del fondo final en UDIS con el valor estimado de la UDI al año del retiro.</div></div>
+          <div class="box"><small>Plan seleccionado</small><strong id="retiroPlanLabel">Pago hasta los 65 años</strong><div style="margin-top:10px;color:var(--muted)">El resultado es ilustrativo y sirve como punto de partida para revisar tu caso real.</div></div>
+          <a class="btn btn-primary" style="margin-top:18px" href="https://wa.me/528331407251?text=Hola%20Hugo%2C%20quiero%20revisar%20mi%20proyecci%C3%B3n%20de%20retiro." target="_blank" rel="noreferrer">Quiero revisar mi caso real</a>
         </div>
       </div>
       <div class="calculator">
@@ -220,14 +219,134 @@ Sexo: ${sexo}`;
     }
 
     const money = (value) => new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(Number.isFinite(value)?value:0);
-    function retirementFV(pmt,r,n){if(n<=0)return 0;if(r===0)return pmt*n;return pmt*(((Math.pow(1+r,n)-1)/r)*(1+r))}
-    function futureValueGrowingMonthly(initialMonthly,monthlyRate,annualGrowthRate,months){let balance=0;for(let i=0;i<months;i++){const yearIndex=Math.floor(i/12);const contribution=initialMonthly*Math.pow(1+annualGrowthRate,yearIndex);balance=(balance+contribution)*(1+monthlyRate)}return balance}
-    function futureValueGrowingContributions(initialMonthly,annualGrowthRate,months){let total=0;for(let i=0;i<months;i++){const yearIndex=Math.floor(i/12);total+=initialMonthly*Math.pow(1+annualGrowthRate,yearIndex)}return total}
-    function updateRetirement(){const age=Number(document.getElementById('age').value)||0;const retireAge=Number(document.getElementById('retireAge').value)||0;const monthly=Number(document.getElementById('monthly').value)||0;const inflation=(Number(document.getElementById('inflation').value)||0)/100;const months=Math.max((retireAge-age)*12,0);const traditional=retirementFV(monthly,0.04/12,months);const udisNominalRate=((1+inflation)*(1+0.01))-1;const udisPlan=futureValueGrowingMonthly(monthly,udisNominalRate/12,inflation,months);const contributed=futureValueGrowingContributions(monthly,inflation,months);const gain=udisPlan-traditional;const realValue=udisPlan/Math.pow(1+inflation,months/12);document.getElementById('contributed').textContent=money(contributed);document.getElementById('years').textContent=Math.round(months/12)+' años';document.getElementById('traditional').textContent=money(traditional);document.getElementById('udisPlan').textContent=money(udisPlan);document.getElementById('gain').textContent=money(gain);document.getElementById('realValue').textContent=money(realValue)}
-    function updateFiscal(){const income=Number(document.getElementById('income').value)||0;const monthlyContribution=Number(document.getElementById('monthlyContribution').value)||0;const annualContribution=monthlyContribution*12;const legalCap=Math.min(income*0.1,206000);const deductible=Math.min(annualContribution,legalCap);const estimatedRate=income>1000000?0.30:income>500000?0.24:0.21;const estimatedRefund=deductible*estimatedRate;const realCost=annualContribution-estimatedRefund;document.getElementById('legalCap').textContent=money(legalCap);document.getElementById('annualContribution').textContent=money(annualContribution);document.getElementById('estimatedRefund').textContent=money(estimatedRefund);document.getElementById('estimatedRate').textContent='Tasa estimada usada: '+Math.round(estimatedRate*100)+'%';document.getElementById('realCost').textContent=money(realCost)}
-    ['age','retireAge','monthly','inflation'].forEach(id=>document.getElementById(id).addEventListener('input',updateRetirement));
+
+    const primasBase = {
+      22: { "65": 1556, "15": 3171, "10": 4192 },
+      32: { "65": 2262, "15": 3540, "10": 4706 },
+      42: { "65": 3687, "15": 4153, "10": 5544 }
+    };
+
+    const valoresFinales = {
+      M: {
+        22: { "65": 99195, "15": 81686, "10": 73026 },
+        32: { "65": 93389, "15": 73831, "10": 67205 },
+        42: { "65": 92266, "15": 68617, "10": 63922 }
+      },
+      F: {
+        22: { "65": 104356, "15": 84769, "10": 75903 },
+        32: { "65": 96949, "15": 74844, "10": 68627 },
+        42: { "65": 94771, "15": 69720, "10": 64824 }
+      }
+    };
+
+    const etiquetasPlan = {
+      "65": "Pago hasta los 65 años",
+      "15": "Pago por 15 años",
+      "10": "Pago por 10 años"
+    };
+
+    const BMX_TOKEN = "";
+    const UDI_FALLBACK = 8.00;
+    let udiHoyActual = UDI_FALLBACK;
+
+    function interpolar(edad, tabla, plan) {
+      const edades = [22, 32, 42];
+      if (edad <= 22) {
+        const v22 = tabla[22][plan];
+        const v32 = tabla[32][plan];
+        return v22 + ((edad - 22) / 10) * (v32 - v22);
+      }
+      if (edad >= 42) {
+        const v32 = tabla[32][plan];
+        const v42 = tabla[42][plan];
+        return v42 + ((edad - 42) / 10) * (v42 - v32);
+      }
+      if (edad <= 32) {
+        const v22 = tabla[22][plan];
+        const v32 = tabla[32][plan];
+        return v22 + ((edad - 22) / 10) * (v32 - v22);
+      }
+      const v32 = tabla[32][plan];
+      const v42 = tabla[42][plan];
+      return v32 + ((edad - 32) / 10) * (v42 - v32);
+    }
+
+    async function obtenerUDIHoy() {
+      if (!BMX_TOKEN) {
+        udiHoyActual = UDI_FALLBACK;
+        document.getElementById('udiHoyDisplay').textContent = `$${udiHoyActual.toFixed(2)}`;
+        return;
+      }
+      try {
+        const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SP68257/datos/oportuno?token=${BMX_TOKEN}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        const dato = data?.bmx?.series?.[0]?.datos?.[0]?.dato;
+        const valor = Number(String(dato).replace(/,/g, ''));
+        if (Number.isFinite(valor) && valor > 0) {
+          udiHoyActual = valor;
+        } else {
+          udiHoyActual = UDI_FALLBACK;
+        }
+      } catch (error) {
+        udiHoyActual = UDI_FALLBACK;
+      }
+      document.getElementById('udiHoyDisplay').textContent = `$${udiHoyActual.toFixed(2)}`;
+    }
+
+    function updateRetirement() {
+      const edad = Number(document.getElementById('retiroEdad').value) || 0;
+      const sexo = document.getElementById('retiroSexo').value;
+      const plan = document.getElementById('retiroPlan').value;
+
+      if (!edad || edad < 18 || edad > 60) return;
+
+      const primaAnual = interpolar(edad, primasBase, plan);
+      const primaMensual = primaAnual / 12;
+      const udiFinal = interpolar(edad, valoresFinales[sexo], plan);
+
+      let añosPago = 0;
+      if (plan === "65") añosPago = Math.max(65 - edad, 0);
+      if (plan === "15") añosPago = 15;
+      if (plan === "10") añosPago = 10;
+
+      const aportacionTotalUDI = primaAnual * añosPago;
+      const añosRetiro = Math.max(65 - edad, 0);
+      const inflacion = 0.04;
+      const udiFutura = udiHoyActual * Math.pow(1 + inflacion, añosRetiro);
+
+      const aportacionTotalPesos = aportacionTotalUDI * udiFutura;
+      const valorPesos = udiFinal * udiFutura;
+
+      document.getElementById('retiroMensual').textContent = money(primaMensual * udiHoyActual);
+      document.getElementById('retiroTotal').textContent = money(aportacionTotalPesos);
+      document.getElementById('retiroUdis').textContent = `${Math.round(udiFinal).toLocaleString('es-MX')} UDIS`;
+      document.getElementById('retiroPesos').textContent = money(valorPesos);
+      document.getElementById('retiroPlanLabel').textContent = etiquetasPlan[plan];
+      document.getElementById('udiHoyDisplay').textContent = `$${udiHoyActual.toFixed(2)}`;
+    }
+
+    function updateFiscal(){
+      const income=Number(document.getElementById('income').value)||0;
+      const monthlyContribution=Number(document.getElementById('monthlyContribution').value)||0;
+      const annualContribution=monthlyContribution*12;
+      const legalCap=Math.min(income*0.1,206000);
+      const deductible=Math.min(annualContribution,legalCap);
+      const estimatedRate=income>1000000?0.30:income>500000?0.24:0.21;
+      const estimatedRefund=deductible*estimatedRate;
+      const realCost=annualContribution-estimatedRefund;
+      document.getElementById('legalCap').textContent=money(legalCap);
+      document.getElementById('annualContribution').textContent=money(annualContribution);
+      document.getElementById('estimatedRefund').textContent=money(estimatedRefund);
+      document.getElementById('estimatedRate').textContent='Tasa estimada usada: '+Math.round(estimatedRate*100)+'%';
+      document.getElementById('realCost').textContent=money(realCost);
+    }
+
+    ['retiroEdad','retiroSexo','retiroPlan'].forEach(id=>document.getElementById(id).addEventListener('input',updateRetirement));
     ['income','monthlyContribution'].forEach(id=>document.getElementById(id).addEventListener('input',updateFiscal));
-    updateRetirement();updateFiscal();
+
+    obtenerUDIHoy().then(updateRetirement);
+    updateFiscal();
   </script>
 </body>
 </html>
